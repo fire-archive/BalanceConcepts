@@ -1,0 +1,179 @@
+## Level 1: Intro to Game Balance
+
+*Originally posted July 14, 2010*
+
+### Class Announcements
+
+I have to admit I was a little surprised to see that people were still signing up for the paid course after it started, but I suppose it’s common enough for people to join a class early in the term. However, to be fair to those who signed up well in advance, I’ll be closing signups this Sunday (July 10) at midnight EDT. So, if you haven’t signed up and still want in, make sure to click the Paypal link before then!
+
+### Readings/Playings
+
+If you haven’t already, you should watch the [intro video](http://gamebalanceconcepts.supercoolschool.com/classes/3076) for this course first, before reading on. You may need to create an account on that website, but registration for the intro video is free.
+
+### This Week’s Topic
+
+This week is probably going to start a bit slow for those of you who are experienced game designers (or those who are hoping to dive deep into the details). Instead, I want to use this week mostly to get everyone into the mindset of a game designer presented with a balance task, and I want to lay out some basic vocabulary terms so we can communicate about game balance properly.
+
+You can think of this week like a tutorial level. The difficulty and pacing of this course will ramp up in the following weeks.
+
+### What is Game Balance?
+
+I would start by asking the question “what is game balance?” but I answered it in the teaser video already. While perhaps an oversimplification, we can say that game balance is mostly about figuring out what numbers to use in a game.
+
+This immediately brings up the question: what if a game doesn’t have any numbers or math involved? The playground game of *[Tag](http://en.wikipedia.org/wiki/Tag_(game))* has no numbers, for example. Does that mean that the concept of “game balance” is meaningless when applied to *Tag*?
+
+The answer is that *Tag* does in fact have numbers: how fast and how long each player can run, how close the players are to each other, the dimensions of the play area, how long someone is “it.” We don’t really track any of these stats because *Tag* isn’t a professional sport… but if it was a professional sport, you’d better believe there would be trading cards and websites with all kinds of numbers on them!
+
+So, every game does in fact have numbers (even if they are hidden or implicit), and the purpose of those numbers is to describe the game state.
+
+### How do you tell if a game is balanced?
+
+Knowing if a game is balanced is not always trivial. *[Chess](http://en.wikipedia.org/wiki/Chess)*, for example, is not entirely balanced: it has been observed that there is a [slight advantage to going first](http://en.wikipedia.org/wiki/First-move_advantage_in_chess). However, it hasn’t been definitively proven whether this imbalance is mechanical (that is, there is a bona fide tactical/strategic advantage to the first move) or psychological (players assume there is a first-move advantage, so they trick themselves into playing worse when they go second). Interestingly, this first-move advantage disappears at lower skill levels; it is only observed at championship tournaments. Keep in mind that this is a game that has been played, in some form, for thousands of years. And we *still* don’t know exactly *how* unbalanced it is!
+
+In the case of *Chess*, a greater degree of player skill makes the game unbalanced. In some cases, it works the other way around, where skilled players can *correct* an inherent imbalance through clever play. For example, in *[Settlers of Catan](http://en.wikipedia.org/wiki/Settlers_of_Catan)*, much of the game revolves around trading resources with other players. If a single player has a slight gameplay advantage due to an improved starting position, the other players can agree to simply not trade with that player for a time (or only offer unfair trades at the expense of that player) until such time as the starting positions equalize. This would not happen in casual games, as the players would be unable to recognize a slight early-game advantage; at the tournament level, however, players would be more likely to spot an inherent imbalance in the game, and act accordingly.
+
+In short, game balance is not an easy or obvious task. (But you probably could have figured that out, given that I’m going to talk for ten straight weeks on the subject!)
+
+### Towards a critical vocabulary
+
+Just like last summer, we need to define a few key terms that we’ll use as we talk about different kinds of balance.
+
+### Determinism
+
+For our purposes, I define a “deterministic” game as one where if you start with a given game state and perform a particular action, it will always produce the same resulting new game state.
+
+*Chess* and *Go* and *Checkers* are all deterministic. You never have a situation where you move a piece, but due to an unexpected combat die roll the piece gets lost somewhere along the way, or something. (Unless you’re playing a nondeterministic variant, anyway.)
+
+*Candyland* and *Chutes & Ladders* are not deterministic. Each has a random mechanism for moving players forward, so you never know quite how far you’ll move next turn.
+
+*Poker* is not deterministic, either. You might play several hands where you appear to have the same game state (your hand and all face-up cards on the table are the same), but the actual results of the hand may be different because you never know what the opponents’ cards are.
+
+*Rock-Paper-Scissors* is not deterministic, in the sense that any given throw (like Rock) will sometimes win, sometimes lose, and sometimes draw, depending on what the opponent does.
+
+Note that there are deterministic elements to all of these games. For example, once you have rolled your die in *Chutes & Ladders*, called the hand in *Poker*, or made your throw in *Rock-Paper-Scissors*, resolving the turn is done by the (deterministic) rules of the game. If you throw Rock and your opponent throws Paper, the result is always the same.
+
+### Non-determinism
+
+The opposite of a deterministic game is a non-deterministic game. The easiest way to illustrate the difference is by comparing the arcade classic *Pac-Man* with its sequel *Ms. Pac-Man*.
+
+The original *Pac-Man* is entirely deterministic. The ghosts follow an AI that is purely dependent on the current game state. As a result, following a pre-defined sequence of controller inputs on a given level will always produce the exact same results, every time. Because of this deterministic property, some players were able to figure out [patterns of movements](http://nrchapman.com/pacman/); the game changed from one of chasing and being chased to one of memorizing and executing patterns.
+
+This ended up being a problem: arcade games required that players play for 3 minutes or less, on average, in order to remain profitable. Pattern players could play for hours. In *Ms. Pac-Man*, an element of non-determinism was added: sometimes the ghosts would choose their direction randomly. As a result, *Ms. Pac-Man* returned the focus of gameplay from pattern execution to quick thinking and reaction, and (at the championship levels, at least) the two games play quite differently.
+
+Now, this is not to say that a non-deterministic game is always “better.” Remember, *Chess* and *Go* are deterministic games that have been played for thousands of years; as game designers today, we count ourselves lucky if our games are played a mere two or three years from the release date. So my point is not that one method is superior to the other, but rather that analyzing game balance is done differently for deterministic versus non-deterministic games.
+
+Deterministic games can *theoretically* undergo some kind of brute-force analysis, where you look at all the possible moves and determine the best one. The number of moves to consider may be so large (as with the game *Go*) that a brute-force solve is impossible, but in at least some cases (typically early-game and end-game positions) you can do a bit of number-crunching to figure out optimal moves.
+
+Non-deterministic games don’t work that way. They require you to use probability to figure out the *odds* of winning for each move, with the understanding that any given playthrough might give a different actual result.
+
+### Solvability
+
+This leads to a discussion of whether a game is *solvable*. When we say a game is solvable, in general, we mean that the game has a single, knowable “best” action to take at any given point in play, and it is possible for players to know what that move is. In general, we find solvability to be an undesirable trait in a game. If the player knows the best move, they aren’t making any interesting decisions; every decision is obvious.
+
+That said, there are lots of kinds of solvability, and some kinds are not as bad as others.
+
+### Trivial solvability
+
+Normally, when we say a game is *solvable* in a bad way, we mean that it is *trivially* solvable: it is a game where the human mind can completely solve the game in real-time. *Tic-Tac-Toe* is a common example of this; young children who haven’t solved the game yet find it endlessly fascinating, but at some point they figure out all of the permutations, solve the game, and no longer find it interesting.
+
+We can still talk about the balance of trivially solvable games. For example, given optimal play on both sides, we know that *Tic-Tac-Toe* is a draw, so we could say in this sense that the game is balanced.
+
+However, we could also say that if you look at all possible games of *Tic-Tac-Toe*that could be played, you’ll find that there are more ways for X to win than O, so you could say it is unbalanced because there is a first-player advantage (although that advantage can be negated through optimal play by both players). These are the kinds of balance considerations for a trivially solvable game.
+
+### Theoretical complete solvability
+
+There are games like *Chess* and *Go* which are theoretically solvable, but in reality there are so many permutations that the human mind (and even computers) can’t realistically solve the entire game. Here is a case where games are solvable but still interesting, because their complexity is beyond our capacity to solve them.
+
+It is hard to tell if games like this are balanced, because we don’t actually know the solution and don’t have the means to actually solve it. We must rely on our game designer intuition, the (sometimes conflicting) opinions of expert players, or tournament stats across many championship-level games, to merely get a good guess as to whether the game is balanced. (Another impractical way to balance these games is to sit around and wait for computers to become powerful enough to solve them within our lifetimes, knowing that this may or may not happen.)
+
+### Solving non-deterministic games
+
+You might think that only deterministic games can be solved. After all, non-deterministic games have random or unknown elements, so “optimal” play does not guarantee a win (or even a draw). However, I would say that non-deterministic games can still be “solved,” it’s just that the “solution” looks a lot different: a solution in this case is a set of actions that maximize your probability of winning.
+
+The card game *Poker* provides an interesting example of this. You have some information about what is in your hand, and what is showing on the table. Given this information, it is possible to compute the exact odds of winning with your hand, and in fact championship players are capable of doing this in real-time. Because of this, all bets you make are either optimal, or they aren’t. For example, if you compute you have a 50/50 chance of winning a $300 pot, and you are being asked to pay $10 to stay in, that is clearly an optimal move for you; if you lost $10 half of the time and won $300 the other half, you would come out ahead. In this case, the “solution” is to make the bet.
+
+You might wonder, if *Poker* is solvable, what stops it from becoming a boring grind of players computing odds with a calculator and then betting or not based on the numbers? From a game balance perspective, such a situation is dangerous: not only do players know what the best move is (so there are only obvious decisions), but sometimes optimal play will end in a loss, effectively *punishing* a player for their great skill at odds computation! In games like this, you need some kind of mechanism to get around the problem of solvability-leading-to-player-frustration.
+
+The way *Poker* does this, and the reason it’s so interesting, is that players may choose to play suboptimally in order to bluff. Your opponents’ behavior may influence your decisions: if the guy sitting across from you is betting aggressively, is it because he has a great hand and knows something you don’t know? Or is he just bad at math? Or is he good at math, and betting high with a hand that can’t really win, but he’s trying to trick you into thinking his hand is better than it really is? This human factor is *not* solvable, but the solvable aspects of the game are used to inform players, which is why at the highest levels *Poker* is a game of psychology, not math. It is these psychological elements that prevent *Poker* from turning into a game of pure luck when played by skilled individuals.
+
+### Solving intransitive games
+
+*Intransitive* games are a fancy way of saying “games like *Rock-Paper-Scissors*.” Since the outcome depends on a simultaneous choice between you and your opponent, there does not appear to be an optimal move, and therefore there is no way to solve it. But in fact, the game *is* solvable… it’s just that the solution looks a bit different from other kinds of games.
+
+The solution to *Rock-Paper-Scissors* is a ratio of 1:1:1, meaning that you should throw about as many of each type as any other. If you threw more of one type than the others (say, for example, you favored *Paper*), your opponent could throw the thing that beats your preferred throw (*Scissors*) more often, which lets them win slightly more than average. So in general, the “solution” to *RPS* is to throw each symbol with equal frequency in the long term.
+
+Suppose we made a rules change: every win with *Rock* counts as two wins instead of one. Then we would have a different solution where the ratios would be uneven. There are mathematical ways to figure out exactly what this new ratio would be, and we will talk about how to do that later in this course. You might find this useful, for example, if you’re making a real-time strategy game with some units that are strong against other unit types (in an intransitive way), but you want certain units to be more rare and special in gameplay than others. So, you might change the relative capabilities to make certain units more cost-efficient or more powerful overall, which in turn would change the relative frequencies of each unit type appearing (given optimal play).**
+
+### Perfect information
+
+A related concept to solvability is that of information availability. In a game with *perfect* or *complete* information, all players know all elements of the game state at all times. *Chess* and *Go* are obvious examples.
+
+You might be able to see, then, that **any deterministic game with perfect information is *at least* *theoretically*, completely solvable**.
+
+Other games have varying degrees of *incomplete* information, meaning that each player does not know the entire game state. Card games like *Hearts* or *Poker* work this way; in these games, each player has privileged information where they know some things the opponents don’t, and in fact part of the game is trying to figure out the information that the other players know. With *Hearts* in particular, the sum of player information is the game state; if players combined their information, the game would have perfect information.
+
+Yet other games have information that is concealed from *all* of the players. An example of this is the card game *Rummy*. In this game, all players know what is in the discard pile (common information), each player knows what is in his or her own hand but no one else’s hand (privileged information), and no player knows what cards remain in the draw deck or what order those cards are placed in (hidden information).
+
+Trading-card games like *Magic: the Gathering* offer additional layers of privileged information, because players have some privileged information about the possibility space of the game. In particular, each player knows the contents of cards in their own deck, but not their opponent’s, although neither player knows the exact order of cards in their own draw pile. Even more interesting, there are some cards that can give you some limited information on all of these things (such as cards that let you peek at your opponent’s hand or deck), and part of the challenge of deck construction is deciding how important it is to gain information versus how important it is to actually attack or defend.
+
+### Symmetry
+
+Another concept that impacts game balance is whether a game is *symmetric* or *asymmetric*. Symmetric games are those where all players have exactly the same starting position and the same rules. *Chess* is *almost* symmetric, except for that pesky little detail about White going first.
+
+Could you make *Chess* symmetric with a rules change? Yes: for example, if both players wrote down their moves simultaneously, then revealed and resolved the moves at the same time, the game would be completely symmetric (and in fact there are variants along these lines). Note that in this case, symmetry requires added complexity; you need extra rules to handle cases where two pieces move into or through the same square, or when one piece enters a square just as another piece exits the square.
+
+In one respect, you could say that perfectly symmetric games are automatically balanced. At the very least, you know that no player is at an advantage or disadvantage from the beginning, since they have the exact same starting positions. However, symmetry alone does not guarantee that the *game objects* or *strategies* within the game are balanced; there may still be certain pieces that are much more powerful than others, or certain strategies that are clearly optimal, and symmetry doesn’t change that. Perfect symmetry is therefore not an “easy way out” for designers to make a balanced game.
+
+#### The Metagame
+
+The term *metagame* literally means “the game surrounding the game” and generally refers to the things players do when they’re not actively playing the game, but their actions are still affecting their chances to win their next game. Trading card games like *Magic: the Gathering* are a clear example of this: in between games, players construct a deck, and the contents of that deck affect their ability to win. Another example would be championship-level *Poker* or even world-tournament *Rock-Paper-Scissors*, players analyze the common behaviors and strategies of their opponents. Professional sports have all kinds of things going on in between games: scouting, drafting, trading, training, and so on.
+
+For games that have a strong metagame, balance of the metagame is an important consideration. Even if the game itself is balanced, a metagame imbalance can destroy the balance of the game. Professional sports are a great example. Here is a positive feedback loop that is inherent in any professional sport: teams that win more games, get more money; more money lets them attract better players, which further increases their chance of winning more games. (With apologies to anyone who lives in New York, this is the reason everyone else hates the Yankees.)
+
+Other sports have metagame mechanics in place to control this positive feedback. American Football includes the following:
+
+-   Drafts. When a bunch of players leave their teams to be picked up by other teams, the weakest team gets to choose first. Thus, the weakest teams pick up the strongest players each year.
+-   Salary caps. If there is a limit to how much players can make, it prevents a single team from being able to throw infinite money at the problem. Even weaker teams are able to match the max salary for a few of their players.
+-   Player limits. There are a finite number of players allowed on any team; a good team can’t just have an infinite supply of talent.
+
+These metagame mechanics are not arbitrary or accidental. They were put in place on purpose, by people who know something about game balance, and it’s part of the reason why any given Sunday, the weakest team in the NFL might be able to beat the strongest team.
+
+From this, you might think that fixing the metagame is a great way to balance the game. Trading card games offer two examples of where this tactic fails.
+
+First, let’s go back to the early days of *Magic: the Gathering*. Some cards are rarer than others. Thus, some rare cards ended up being flat-out better than their more common counterparts. Richard Garfield clearly thought that rarity itself was a way to balance the game. (In his defense, this was not an unreasonable assumption at the time. He had no way of knowing that some people would spend thousands of dollars on cards just to get a full set of rares, nor did he know that people would largely ignore the rules for “ante” which served as an additional balancing factor.) Today, trading card game designers are more aware of this problem; while one does occasionally see games where “more rare = more powerful,” players are (thankfully) less willing to put up with those kinds of shenanigans.
+
+Second, TCGs have a problem that video games don’t have: once a set of cards is released, it is too late to fix it with a “patch” if some kind of gross imbalance is discovered. In drastic cases they can restrict or outright ban a card, or issue some kind of errata, but in most cases this is not practical; the designers are stuck. Occasionally you might see a designer that tries to balance an overpowered card in a previous set by creating a “counter-card” in the next set. This is a metagame solution: if all the competitive decks use Card X, then a new Card Y that punishes the opponent for playing Card X gives players a new metagame option… but if Card Y does nothing else, it is only useful in the context of the metagame. This essentially turns the metagame into Rock (dominant deck) – Paper (deck with counter-card) – Scissors (everything else). This may be preferable to a metagame with only one dominant strategy, but it’s not much better, and it mostly shifts the focus from the actual play of the game to the metagame: you may as well just show your opponent your deck and determine a winner that way.
+
+This is admittedly an extreme example, and there are other ways to work around an imbalance like this. The counter-card might have other useful effects. The game overall might be designed such that player choices *during* the game contribute greatly to the outcome, where the deck is more of an influence on your play style than a fixed strategy. Still, some games have gone so far as to print a card that says “When your opponent plays [specific named card], [something really bad happens to them]” with no other effect, so I thought this was worth bringing up.
+
+### Game balance versus metagame balance
+
+In professional sports, metagame fixes make the game more balanced. In TCGs, metagame fixes feel like a hack. Why the difference?
+
+The reason is that in sports, the imbalance exists in the metagame to begin with, so a metagame fix for this imbalance is appropriate. In TCGs, the imbalance is either part of the game mechanics or individual game objects (i.e. specific cards); the metagame imbalances that result from this are a symptom and not the root cause. As a result, a metagame fix for a TCG is a response to a symptom, while the initial problem continues unchecked.
+
+The lesson here is that a game balance problem in one part of a game can propagate to and manifest in other areas, so the problems you see during playtesting are not always the exact things that need to be fixed. When you identify an imbalance, before slapping a fix on it, ask yourself *why* this imbalance is really happening, what is actually causing it… and then, what is causing that, and what is causing *that*, and so on as deep as you can go.
+
+### Game Balance Made Easy, For Lazy People
+
+I’m going to try to leave you each week with some things you can do *right now* to improve the balance of a game you’re working on, and then some “homework” that you can do to improve your skills. Since we just talked about vocabulary (symmetry, determinism, solvability, perfect information, and the metagame) this week, there’s not a lot to do, so instead I’m going to start by saying what *not* to do.
+
+If you’re having trouble balancing a game, the easiest way to fix it is to get your players to do this for you. One way to do this is auction mechanics. There is nothing wrong with auctions as a game mechanic, mind you – they are often very compelling and exciting – but they can be used as a crutch to cover up a game imbalance, and you need to be careful of that.
+
+Let me give an example of how this works. Suppose you’re a designer at Blizzard working on *Warcraft IV*, and you have an Orcs-vs-Humans two-player game that you want to balance, but you think the Orcs are a little more powerful than the humans (but not much). You decide the best way to balance this is to reduce the starting resources of the Orcs; if the Humans start with, say, 100 Gold… maybe the Orcs start with a little less. How much less? Well, that’s what game balance is all about, but you have no idea how much less.
+
+Here’s a solution: make players bid their starting Gold on the right to play the Orcs at the start of the game. Whoever bids the most, loses their bid; the other player starts with the full 100 Gold and plays the weaker Humans. Eventually, players will reach a consensus and start bidding about the same amount of Gold, and this will make things balanced. I say this is lazy design because there *is* a correct answer here, but instead of taking the trouble to figure it out, you instead shift that burden to the players and make them balance the game for you.
+
+Note that this can actually be a great tool in *playtesting*. Feel free to add an auction in a case like this, let your testers come to a consensus of how much something is worth, then just cost it accordingly in the final version (without including the auction).
+
+Here’s another way to get players to balance your game for you: in a multiplayer free-for-all game, include mechanics that let the players easily gang up on the leader. That way, if one player finds a game imbalance, the other players can cooperate to bring them down. Of course, this brings other gameplay problems with it. Players may “sandbag” (play suboptimally *on purpose*) in order to not attract too much attention. Players who do well (even without rules exploits) may feel like the other players are punishing them for being good players. Kill-the-leader mechanics serve as a strong negative feedback loop, and negative feedback has other consequences: the game tends to take longer, early-game skill is not as much a factor as late-game, and some players may feel that the outcome of the game is more decided on their ability to not be noticed than their actual game skill. Again, there is nothing inherently wrong with giving players the ability to form alliances against each other… but doing it for the *sole* purpose of letting players deal with your poor design and balancing skills should not be the first and only solution.
+
+Okay, is there anything you *can* do right now to improve the balance of a game you’re working on? I would say, examine your game to see if you are using your players as a game balance crutch (through auctions, kill-the-leader mechanics, or similar). Try removing that crutch and seeing what happens. You might find out that these mechanics are covering up game imbalances that will become more apparent when they’re removed. When you find the actual imbalances that used to be obscured, you can fix them and make the game stronger. (You can always add your auctions or kill-the-leader mechanics back in later, if they are important to the gameplay.)
+
+### Homework
+
+I’ll go out on a limb and guess that if you’re reading this, you are probably playing at least one game in your spare time. If you work in the game industry as a designer, you may be playing a game at your day job for research. Maybe you have occasion to watch other people play, either while playtesting your own game, or on television (such as watching a game show or a professional sports match).
+
+As you play (or watch) these games this week, don’t just play/watch for fun. Instead, think about the actions in the game and ask yourself if you think the game is balanced or not. Why do you think that? If you feel it’s not, where are the imbalances? What are the root causes of those imbalances, and how would you change them if you wanted to fix them? Write down your thoughts if it helps.
+
+The purpose of this is not to actually improve the game you’re examining, but to give you some practice in thinking critically about game balance. It’s emotionally easier to find problems in other people’s games than your own (even if the actual *process* is the same), so start by looking at the balance or imbalance in other people’s games first.

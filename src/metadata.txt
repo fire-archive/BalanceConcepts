@@ -1,0 +1,6 @@
+Title: Game Balance Concepts
+Subtitle: A continued experiment in game design and teaching
+Author: Written by Ian Schreiber and Typeset by Ernest Lee
+Date: Ongoing Date
+Chapterstyle: bringhurst
+

@@ -1,0 +1,186 @@
+## Level 2: Numeric Relationships
+
+*Originally posted July 7, 2010*
+
+### Course Announcements
+
+As promised last week, signups for the paid course are now closed. If you are just finding this blog now, I apologize, but you wouldn’t want to start two weeks behind anyway. If you’re coming late to the party, best advice I can give you is to start reading this blog from the beginning and catch up whenever you do.
+
+### Readings/Playings
+
+None for this week, other than this post… but you will be doing a bit of reading later for your “homework” to compensate.
+
+### This Week’s Topic
+
+This week, I’m going to talk about the different kinds of numbers you see in games and how to classify them. This is going to be important later, because you can’t really know how to balance a game or how to choose the right numbers unless you first know what kinds of numbers you’re dealing with. Sometimes, a balance change is as simple as replacing one kind of number with another, so understanding what *kinds*of numbers there are and getting an intuition for how they work is something we need to cover before anything else.
+
+In particular, we’re going to be examining *relationships* between numbers. Numbers in games don’t exist in a vacuum. They only have meaning in relation to each other. For example, suppose I tell you that the main character in a game does 5 damage when he attacks. That tells you nothing unless you know how much damage enemies can take before they keel over dead. Now you have two numbers, Damage and Hit Points, and each one only has meaning in relation to the other.
+
+Or, suppose I tell you that a sword costs 250 Gold. That has no meaning, until I tell you that the player routinely finds bags with thousands of Gold lying around the country side, and then you know the sword is cheap. Or, I tell you that the player only gets 1 Gold at most from winning each combat, and then it’s really expensive. Even within a game, the relative value of something can change; maybe 250 Gold is a lot at the start of the game but it’s pocket change at the end. In *World of Warcraft*, 1 Gold used to be a tidy sum, but today it takes tens or hundreds to buy the really epic loot.
+
+With all that said, what kinds of ways can numbers be related to each other?
+
+### Identity and Linear Relationships
+
+Probably the simplest type of relationship, which math geeks would call an *identity* relationship, is where two values change in exactly the same way. Add +1 to one value, it’s equivalent to adding +1 to the other. For game balance purposes, you can treat the two values as identical.
+
+You would think that in such a case, you might just make a single value, but there are some cases where it makes sense to have two different values that just happen to have a one-to-one conversion. As an example, *Ultima III: Exodus* has Food, something that each character needed to not starve to death in a dungeon. You never got food as an item drop, and could only buy it from food vendors in towns. Food decreases over time, and has no other value (and cannot be sold or exchanged for anything else); its only purpose is to act as a continual slow drain on your resources. Each character also has Gold, something that they find while adventuring. Unlike food, Gold doesn’t degrade over time, and it is versatile (you can use it to bribe guards, buy hints, purchase weapons or armor… or purchase Food). While these are clearly two separate values that serve very different purposes within the game, each unit of Food costs 1 Gold (10 Food costs 10 Gold, 1000 Food costs 1000 Gold, and so on). Food and Gold have an identity relationship… although it is one-way in this case, since you can convert Gold to Food but not vice versa.
+
+A more general case of an identity relationship is the *linear* relationship, where the conversion rate between two values is a constant. If a healing spell always costs 5 MP and heals exactly 50 HP, then there is a 1-to-10 linear relationship between MP and HP. If you can spend 100 Gold to gain +1 Dexterity, there’s a 100-to-1 linear relationship between Gold and Dexterity. And so on.
+
+Note that we are so far ignoring cases where a relationship is partly random (maybe that healing spell heals somewhere between 25 and 75 HP, randomly chosen each time). Randomness is something we’ll get into in a few weeks, so we’re conveniently leaving that out of the picture for now.
+
+### Exponential and Triangular Relationships
+
+Sometimes, a linear relationship doesn’t work for your game. You may have a relationship where there are either increasing or diminishing returns.
+
+For example, suppose a player can pay resources to gain additional actions in a turn-based strategy game. One extra action might be a small boost, but three or four extra actions might be like taking a whole extra turn — it might feel a lot more than 3 or 4 times as powerful as a single action. This would be increasing returns: each extra action is more valuable than the last. You would therefore want the *cost* of each extra action to increase, as you buy more of them.
+
+Or, maybe you have a game where players have incentive to spend all of their in-game money every turn to keep pace with their opponents, and hoarding cash has a real opportunity cost (that is, they miss out on opportunities they would have had if they’d spent it instead). In this case, buying a lot of something all at once is actually not as good as buying one at a time, so it makes sense to give players a discount for “buying in bulk” as it were. Here we have a decreasing return, where each extra item purchased is not as useful as the last.
+
+In such cases, you need a numeric relationship that increases or decreases its rate of exchange as you exchange more or less at a time. The simplest way to do this is an *exponential* relationship: when you add to one value, multiply the other one. An example is doubling: for each +1 you give to one value, *double* the other one. This gives you a relationship where buying 1, 2, 3, 4 or 5 of something costs 1, 2, 4, 8 or 16, respectively. As you can see, the numbers get really big, really fast when you do this.
+
+Because the numbers get prohibitively large very quickly, you have to be careful when using exponential relationships. For example, nearly every card in any Collectible Card Game that I’ve played that has the word “double” on it somewhere (as in, one card doubles some value on another card) ends up being too powerful. I know offhand of one exception, and that was an all-or-nothing gamble where it doubled your attack strength but then made you lose at the end of the turn if you hadn’t won already! The lesson here is to be very, *very* careful when using exponentials.
+
+What if you want something that increases, but not as fast as an exponential? A common pattern in game design is the *triangular*relationship. If you’re unfamiliar with the term, you have probably at least seen this series:
+
+1, 3, 6, 10, 15, 21, 28, …
+
+That is the classic triangular pattern (so called because several ways to visualize it involve triangles). In our earlier example, maybe the first extra action costs 1 resource; the next costs 2 (for a running total of 3), the next costs 3 (for a total of 6), and so on.
+
+An interesting thing to notice about triangular numbers is when you look at the difference between each successive pair of numbers. The difference between the first two numbers (1 and 3) is 2. The difference between the next two numbers (3 and 6) is 3. The next difference (between 6 and 10) is 4. So the successive differences are *linear*: they follow the pattern 1, 2, 3, 4…
+
+Triangular numbers usually make a pretty good first guess for increasing costs. What if you want a decreasing cost, where something starts out expensive and gets cheaper? In that case, figure out how much the first one should cost, then make each one after that cost 1 less. For example, suppose you decide the first Widget should cost 7 Gold. Then try making the second cost 6 Gold (for a total of 13), the third costs 5 Gold (total of 18), and so on.
+
+Note that in this case, you will eventually reach a point where each successive item costs zero (or even negative), which gets kind of ridiculous. This is actually a pretty common thing in game balance, that if you have a math formula the game balance will break at the mathematical extremes. The design solution is to set hard limits on the formula, so that you don’t ever reach those extremes. In our Widget example above, maybe the players are simply prevented from buying more than 3 or 4 Widgets at a time.
+
+### Other Numeric Relationships
+
+While linear and triangular relationships are among the most common in games, they are not the only ones available. In fact, there are an infinite number of potential numeric relationships. If none of the typical relationships work for your game, come up with your own custom relationship!
+
+Maybe you have certain cost peaks, where certain thresholds cost more than others because those have in-game significance. For example, if everything in your game has 5 hit points, there is actually a huge difference between doing 4 or 5 damage, so that 5th point of damage will probably cost a lot more than you would otherwise expect. You might have oscillations, where several specific quantities are particularly cheap (or expensive). You can create any ratio between two values that you want… but do so with some understanding of what effect it will have on play!
+
+### Relationships Within Systems
+
+Individual values in a game usually exist within larger systems. By analyzing all of the different numbers and relationships between them in a game’s systems, we can gain a lot of insight into how the game is balanced.
+
+Let us take a simple example: the first *Dragon Warrior* game for the NES. In the game’s combat system, you have four main stats: Hit Points (HP), Magic Points (MP), Attack and Defense. This is a game of attrition; you are exploring game areas, and every few steps you get attacked by an enemy. You lose if your HP is ever reduced to zero.
+
+How are all of these numbers related? Random encounters are related to HP: each encounter reduces HP (you can also say it the other way: by walking around getting into fights, you can essentially convert HP into encounters). This is an inverse relationship, as more encounters means less HP.
+
+There’s a direct relationship between HP and Defense: the more defense you have, the less damage you take, which means your HP lasts longer. Effectively, increasing your Defense is equivalent to giving yourself a pile of extra HP.
+
+Ironically, we see the same relationship between HP and Attack. The higher your attack stat, the faster you can defeat an enemy. If you defeat an enemy faster, that means it has less opportunity to damage you, so you take less damage. Thus, you can survive more fights with higher Attack.
+
+MP is an interesting case, because you can use it for a lot of things. There are healing spells that directly convert MP into HP. There are attack spells that do damage (hopefully more than you’d do with a standard attack); like a higher Attack stat, these finish combats earlier, which means they preserve your HP. There are buff/debuff spells that likewise reduce the damage you take in a combat. There are teleport spells that take you across long distances, so that you don’t have to get in fights along the way, so these again act to preserve your HP. So even though MP is versatile, virtually all of the uses for it involve converting it (directly or indirectly) into HP.
+
+If you draw this all out on paper, you’ll see that everything — Attack, Defense, MP, Monster Encounters — is linked directly to HP. As the loss condition for the game, the designers put the HP stat in the middle of everything! This is a common technique, making a single resource central to all of the others, and it is best to make this central resource either the win or loss condition for the game.
+
+Now, there’s one additional wrinkle here: the combat system interacts with two other systems in the game through the monster encounters. After you defeat a monster, you get two things: Gold and Experience (XP). These interact with the economic and leveling systems in the game, respectively.
+
+Let’s examine the leveling system first. Collect enough XP and you’ll level up, which increases all of your stats (HP, MP, Attack and Defense). As you can see, this creates a feedback loop: defeating enemies causes you to gain a level, which increases your stats, which lets you defeat more enemies. And in fact, this *would* be a positive feedback loop that would cause the player to gain high levels of power very fast, if there weren’t some kind of counteracting force in the game. That counteraction comes in the form of an increasing XP-to-Level relationship, so it takes progressively more and more XP to gain a level. Another counteracting force is that of player time; while the player *could* maximize their level by just staying in the early areas of the game beating on the weakest enemies, the gain is so slow that they are incentivized to take some risks so they can level a little faster.
+
+Examining the economic system, Gold is used for a few things. Its primary use is to buy equipment which permanently increases the player’s Attack or Defense, thus effectively converting Gold into extra permanent HP. Gold can also be used to buy consumable items, most of which mimic the effects of certain spells, thus you can (on a limited basis, since you only have a few inventory slots) convert Gold to temporary MP. Here we see another feedback loop: defeating monsters earns Gold, which the player uses to increase their stats, which lets them defeat even more monsters. In this case, what prevents this from being a positive feedback loop is that it’s limited by progression: you have a limited selection of equipment to buy, and the more expensive stuff requires that you travel to areas that you are just not strong enough to reach at the start of the game. And of course, once you buy the most expensive equipment in the game, extra Gold doesn’t do you much good.
+
+Another loop that is linked to the economic system, is that of progression itself. Many areas in the game are behind locked doors, and in order to open them you need to use your Gold to purchase magic keys. You defeat monsters, get Gold, use it to purchase Keys, and use those keys to open new areas which have stronger monsters (which then let you get even more Gold/XP). Of course, this loop is itself limited by the player’s stats; unlocking a new area with monsters that are too strong to handle does not help the player much.
+
+How would a designer balance things within all these systems? By relating everything back to the central value of HP, and then comparing.
+
+For example, say you have a healing spell and a damage spell, and you want to know which is better. Calculate the amount of HP that the player would no longer lose as a result of using the damage spell and ending the combat earlier, and compare that to the amount of HP actually restored by the healing spell. Or, say you want to know which is better, a particular sword or a particular piece of armor. Again, figure out how much extra HP each would save you.
+
+Now, this does not mean that everything in the game must be exactly equal to be balanced. For example, you may want spells that are learned later in the game to be more cost-effective, so that the player has reason to use them. You may also want the more expensive equipment to be *less* cost-effective, in order to make the player really work for it. However, *at any given time* in the game, you probably want the choices made available at that time to be at least somewhat balanced with each other. For example, if the player reaches a new town with several new pieces of equipment, you would expect those to be roughly equivalent in terms of their HP-to-cost ratios.
+
+### Another Example
+
+You might wonder, if this kind of analysis works for a stat-driven game like an RPG, is it useful for any other kind of game? The answer is yes. Let’s examine an action title, the original *Super Mario Bros.* (made popular from the arcade and NES versions).
+
+What kinds of resources do we have in *Mario*? There are lives, coins, and time (from a countdown timer). There’s actually a numeric score. And then there are objects within the game — coin blocks, enemies, and so on — which can sometimes work for or against you depending on the situation. Let us proceed to analyze the relationships.
+
+-   **Coins:** there is a 100-to-1 relationship between Coins and Lives, since collecting 100 coins awards an extra life. There is a 1-to-200 relationship between Coins and Score, since collecting a coin gives 200 points. There is a relationship between Coin Blocks and Coins, in that each block gives you some number of coins.
+-   **Time:** there is a 100-to-1 relationship between Time and Score, since you get a time bonus at the end of each level. There is also an inverse relationship between Time and Lives, since running out of time costs you a life.
+-   **Enemies:** there is a relationship between Enemies and Score, since killing enemies gives you from 100 to 1000 points (Depending on the enemy). There is an inverse relationship between Enemies and Lives, since sometimes an enemy will cost you a life. (In a few select levels there is potentially a *positive* relationship between Enemies and Lives, as stomping enough enemies in a combo will give extra lives, but that is a special case.)
+-   **Lives:** there is this strange relationship between Lives and everything else, because losing a life resets the Coins, Time and Enemies on a level. Note that since Coins give you extra Lives, and losing a Life resets Coins, any level with more than 100 Coins would provide a positive feedback loop where you could die intentionally, get more than 100 Coins, and repeat to gain infinite lives. The original *Super Mario Bros.*did not have any levels like this, but *Super Mario 3* did.
+-   **Relationship between Lives and Score:** There is no *direct* link between Lives and Score. However, losing a Life resets a bunch of things that give scoring opportunities, so indirectly you can convert a Life to Score. Interestingly, this does not happen the other way around; unlike other arcade games of the time, you cannot earn extra Lives by getting a sufficiently high Score.
+
+Looking at these relationships, we see that Score is actually the central resource in *Super Mario Bros.* since everything is tied to Score. This makes sense in the context of early arcade games, since the win condition is not “beat the game,” but rather, “get the highest score.”
+
+How would you balance these resources with one another. There are a few ways. You can figure out how many enemies you kill and their relative risks (that is, which enemies are harder to kill and which are more likely to kill you). Compare that with how many coins you find in a typical level, and how much time you typically complete the level with. Then, you can either change the amount of score granted to the player from each of these things (making a global change throughout the game), or you can vary the number of coins and enemies, the amount of time, or the length of a level (making a local change within individual levels). Any of these techniques could be used to adjust a player’s expected total score, and also how much each of these activities (coin collecting, enemy stomping, time completion) contributes to the final score.
+
+When you’re designing a game, note that you *can* change your resources around, and even eliminate a resource or change the central resource to something else. The *Mario* series survived this quite well; the games that followed the original eliminated Score entirely, and everything was later related to Lives.
+
+### Interactions Between Relationships
+
+When you form chains or loops of resources and relationships between them, the relationships stack with each other. They can either combine to become more intense, or they can cancel each other out (completely or partially).
+
+We just saw one example of this in the *Mario* games, with Lives and Coins. If you have a level that contains 200 Coins, then the 100 Coins to 1 Life relationship combines with 1 Life to 200 Coins in that level, to create a doubling effect where you convert 1 Life to 2 Lives in a single iteration.
+
+Here’s another example, from the PS2 game *Baldur’s Gate: Dark Alliance*. In this action-RPG, you get XP from defeating enemies, which in turn causes you to level up. The XP-to-Level relationship is triangular: going from Level 1 to Level 2 requires 1000 XP, Level 2 to Level 3 costs 2000 XP, rising to Level 4 costs 3000 XP, and so on.
+
+Each time you level up, you get a number of upgrade points to spend on special abilities. These also follow a triangular progression: at Level 2 you get 1 upgrade point; at Level 3 you get 2 points; the next level gives you 3 points, then the next gives you 4 points, and so on.
+
+However, these relationships chain together, since XP gives you Levels and Levels give you Upgrade Points. Since XP is the actual resource the player is earning, it is the XP-to-Points ratio we care about, and the two triangular relationships actually *cancel* with each other to form a linear relationship of 1000 XP to 1 Upgrade Point. While the awarding of these upgrade points is staggered based on levels, on average you are earning them at a constant XP rate.
+
+How does Time fit into this (as in, the amount of time the player spends on the game)? If the player were fighting the same enemies over and over for the same XP rewards, there would be a triangular increase in the amount of time it takes to earn a level (and a constant amount of time to earn each Upgrade Point, on average). However, as with most RPGs, there is a system of increasing XP rewards as the player fights stronger monsters. This increasing XP curve doesn’t increase as fast as the triangular progression of level-ups, which means that it doesn’t *completely* cancel out the triangular effect, but it does *partly* reduce it — in other words, you level up slightly faster in the early game and slower in the late game, but the play time between level gains doesn’t increase as fast as a triangular relationship.
+
+Note, however, the way this interacts with Upgrade Points. Since the XP-to-Point ratio is linear, and the player gets an increasing amount of XP per unit time, they are actually getting an *increasing rate* of Upgrade Point gain!
+
+This kind of system has some interesting effects. By changing the rate of XP gain (that is, exactly *how fast* the XP rewards increase for defeating enemies) you can change both the rate of leveling up and the rate of Upgrade Point gains. If the XP rewards increase faster than the triangular rate of the levels themselves, the player will actually level up *faster* as the game progresses. If the XP rewards increase more slowly than the rate of level ups, the player will level faster in the early game and slower in the late game (which is usually what you want, as it gives the player frequent rewards early on and starts spacing them out once they’ve committed to continued play). If the XP rewards increase at exactly the same rate, the player will level up at a more or less constant rate.
+
+Suppose you decide to have the player gain levels faster in the early game and slower in the late game, but you never want them to go longer than an hour between levels. How would you balance the XP system? Simple: figure out what level they will be at in the late game, scale the XP gains to take about an hour per level up at that point, and then work your way backwards from there.
+
+Note another useful property this leveling system has: it provides a negative feedback loop that keeps the player in a narrow range of levels during each point in the game. Consider two situations:
+
+-   **Over-leveling:** The player has done a lot of level-grinding and is now too powerful for the enemies in their current region. For one thing, they’ll be able to defeat the nearby enemies faster, so they don’t have to stick around too long. For another, the XP gains aren’t that good if their level is already high; they are unlikely to gain much in the way of additional levels by defeating weaker enemies. The maximum level a player can reach is effectively limited by the XP-reward curve.
+-   **Under-leveling:** Suppose instead the opposite case, where the player has progressed quickly through the game and is now at a lower level than the enemies in the current region. In this case, the XP gains will be relatively high (compared to the player’s level), and the player will only need to defeat a few enemies to level up quickly.
+
+In either case, the game’s system pushes the player’s level towards a narrow range in the middle of the extremes. It is *much* easier to balance a combat system to provide an appropriate level of challenge, when you know what level the player will be at during every step of the way!
+
+### How Relationships Interact
+
+How do you know how two numeric relationships will stack together? Here’s a quick-reference guide:
+
+-   Two linear relationships that combine: multiply them together. If you can turn 1 of Resource A into 2 Resource B, and 1 Resource B into 5 Resource C, then there is a 1-to-10 conversion between A and C (2x5).
+-   Linear relationship combines with an increasing (triangular or exponential) relationship: the increasing relationship just gets multiplied by a bigger number, but the nature of the curve stays the same.
+-   Linear relationship counteracts an increasing relationship: if the linear conversion is large, it may dominate early on, but eventually the increasing relationship will outpace it. Exactly where the two curves meet and the game shifts from one to the other depends on the exact numbers, and tweaking these can provide an interesting strategic shift for the players.
+-   Two increasing relationships combine: you end up with an increasing relationship that’s even faster than either of the two individually.
+-   Two increasing relationships counteract one another: depends on the exact relationships. In general, an exponential relationship will dominate a triangular one (how fast this happens depends on the exact numbers used). Two identical relationships (such as two pure triangulars) will cancel out to form a linear or identity relationship.
+
+### If You’re Working On a Game Now…
+
+Are you designing your own game right now? Try this: make a list of every resource or number in your game on a piece of paper. Put a box around each, and spread the boxes out. Then, draw arrows between each set of boxes that has a direct relationship in your game, and label the arrow with the kind of relationship (linear, triangular, exponential, etc.).
+
+Use this diagram to identify a few areas of interest in the balance of your game:
+
+-   Do you see any loops where a resource can be converted to something else, then maybe something else, and then back to the original? If you get back more of the original than you started with by doing this, you may have just identified a positive feedback loop in your game.
+-   Do you see a central resource that everything else seems tied to? If so, is that central resource either the win or loss condition, or does it seem kind of arbitrary? If not, does it make sense to *create* a new central resource, perhaps by adding new relationships between resources?
+
+You can then use this diagram to predict changes to gameplay. If you change the nature of a relationship, you might be able to make a pretty good guess at what other relationships will also change as a result, and what effect that might have on the game’s systems overall.
+
+If your game is a single-player game with some kind of progression system, “Time” (as in, the amount of time the player spends actually playing the game) should be one of your resources, and you can use your diagram to see if the rewards and power gains the player gets from playing are expected to increase, decrease, or remain constant over time.
+
+### Homework
+
+Here’s your game balance challenge for this week. First, choose any single-player game that you’ve played and are familiar with, that has progression mechanics. Examples of games with progression are action-adventure games (*Zelda*), action-RPGs (*Diablo*), RPGs (*Final Fantasy*), or MMORPGs (*World of Warcraft*). I’ll recommend that you choose something relatively simple, such as an NES-era game or earlier. You’re going to analyze the numbers in this game, and as you’ve seen from the earlier examples here, even simple games can have pretty involved systems.
+
+In these games, there is some kind of progression where the player gains new abilities and/or improves their stats over time. As the player progresses, enemies get stronger; again this could just mean they have higher stats, or they might also gain new abilities that require better strategy and tactics to defeat.
+
+Start by asking yourself this question: overall, what was the difficulty curve of the game like? Did it start off easy and get slowly, progressively harder? Or, did you notice one or more of these undesirable patterns:
+
+-   A series of levels that seemed to go by very slowly, because the player was underpowered at the time and did not gain enough power fast enough to compensate, so you had to grind for a long time in one spot.
+-   A sudden spike in difficulty with one dungeon that had much more challenging enemies than those that came immediately before or after.
+-   A dungeon that was much easier than was probably intended, allowing you to blast through it quickly since you were much more powerful than the inhabitants by the time you actually reached it.
+-   The hardest point in the game was not at the end, but somewhere in the middle. Perhaps you got a certain weapon, ally, or special ability that was *really* powerful, and made you effectively unbeatable from that point on until the end of the game.
+
+So far, all you’re doing is using your memory and intuition, and it probably takes you all of a few seconds to remember the standout moments of epic win and horrible grind in your chosen game. It’s useful to build intuition, but it is even better to make your intuition stronger by backing it up with math. So, once you’ve written down your intuitive guesses at the points where the game becomes unbalanced, let’s start analyzing.
+
+First, seek a strategy guide or FAQ that gives all of the numbers for the game. A web search may turn up surprisingly detailed walkthroughs that show you every number and every resource in the game, and exactly how they are all related.
+
+Next, make a list on paper of all of the resources in the game. Using the FAQ as your guide, also show all relationships between the resources (draw arrows between them, and label the arrows with the relationship type). From this diagram, you may be able to identify exactly what happened.
+
+For example, maybe you seemed to level up a lot in one particular dungeon, gaining a lot of power in a short time. In such a case, you might start by looking at the leveling system: perhaps there is a certain range of levels where the XP requirements to gain a level are much lower than the rest of the progression curve. You might also look at the combat reward system: maybe you just gain a lot more XP than expected from the enemies in that dungeon.
+
+As another example, maybe the game felt too easy after you found a really powerful weapon. In this case you’d look at the combat system: look at how much damage you do versus how much enemies can take, as separate curves throughout the game, and identify the sudden spike in power when you get that weapon. You may be able to graphically see the relationship of your power level versus that of the enemies over time.
+
+Lastly, if you do identify unbalanced areas of the game from this perspective, you should be able to use your numbers and curves to immediately suggest a change. Not only will you know exactly *which* resource needs to be changed, but also *by how much*.
+
+This exercise will probably take you a few hours, as researching a game and analyzing the numbers is not a trivial task (even for a simple game). However, after doing this, you will be much more comfortable with identifying resources and relationships in games, and also being able to use your understanding of a game’s systems to improve the balance of those systems.

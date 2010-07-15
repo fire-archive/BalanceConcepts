@@ -38,7 +38,7 @@ In short, game balance is not an easy or obvious task. (But you probably could h
 
 Just like last summer, we need to define a few key terms that we’ll use as we talk about different kinds of balance.
 
-### Determinism
+#### Determinism
 
 For our purposes, I define a “deterministic” game as one where if you start with a given game state and perform a particular action, it will always produce the same resulting new game state.
 
@@ -52,7 +52,7 @@ For our purposes, I define a “deterministic” game as one where if you start 
 
 Note that there are deterministic elements to all of these games. For example, once you have rolled your die in *Chutes & Ladders*, called the hand in *Poker*, or made your throw in *Rock-Paper-Scissors*, resolving the turn is done by the (deterministic) rules of the game. If you throw Rock and your opponent throws Paper, the result is always the same.
 
-### Non-determinism
+#### Non-determinism
 
 The opposite of a deterministic game is a non-deterministic game. The easiest way to illustrate the difference is by comparing the arcade classic *Pac-Man* with its sequel *Ms. Pac-Man*.
 
@@ -66,13 +66,13 @@ Deterministic games can *theoretically* undergo some kind of brute-force analysi
 
 Non-deterministic games don’t work that way. They require you to use probability to figure out the *odds* of winning for each move, with the understanding that any given playthrough might give a different actual result.
 
-### Solvability
+#### Solvability
 
 This leads to a discussion of whether a game is *solvable*. When we say a game is solvable, in general, we mean that the game has a single, knowable “best” action to take at any given point in play, and it is possible for players to know what that move is. In general, we find solvability to be an undesirable trait in a game. If the player knows the best move, they aren’t making any interesting decisions; every decision is obvious.
 
 That said, there are lots of kinds of solvability, and some kinds are not as bad as others.
 
-### Trivial solvability
+#### Trivial solvability
 
 Normally, when we say a game is *solvable* in a bad way, we mean that it is *trivially* solvable: it is a game where the human mind can completely solve the game in real-time. *Tic-Tac-Toe* is a common example of this; young children who haven’t solved the game yet find it endlessly fascinating, but at some point they figure out all of the permutations, solve the game, and no longer find it interesting.
 
@@ -80,13 +80,13 @@ We can still talk about the balance of trivially solvable games. For example, gi
 
 However, we could also say that if you look at all possible games of *Tic-Tac-Toe*that could be played, you’ll find that there are more ways for X to win than O, so you could say it is unbalanced because there is a first-player advantage (although that advantage can be negated through optimal play by both players). These are the kinds of balance considerations for a trivially solvable game.
 
-### Theoretical complete solvability
+#### Theoretical complete solvability
 
 There are games like *Chess* and *Go* which are theoretically solvable, but in reality there are so many permutations that the human mind (and even computers) can’t realistically solve the entire game. Here is a case where games are solvable but still interesting, because their complexity is beyond our capacity to solve them.
 
 It is hard to tell if games like this are balanced, because we don’t actually know the solution and don’t have the means to actually solve it. We must rely on our game designer intuition, the (sometimes conflicting) opinions of expert players, or tournament stats across many championship-level games, to merely get a good guess as to whether the game is balanced. (Another impractical way to balance these games is to sit around and wait for computers to become powerful enough to solve them within our lifetimes, knowing that this may or may not happen.)
 
-### Solving non-deterministic games
+#### Solving non-deterministic games
 
 You might think that only deterministic games can be solved. After all, non-deterministic games have random or unknown elements, so “optimal” play does not guarantee a win (or even a draw). However, I would say that non-deterministic games can still be “solved,” it’s just that the “solution” looks a lot different: a solution in this case is a set of actions that maximize your probability of winning.
 
@@ -96,7 +96,7 @@ You might wonder, if *Poker* is solvable, what stops it from becoming a boring g
 
 The way *Poker* does this, and the reason it’s so interesting, is that players may choose to play suboptimally in order to bluff. Your opponents’ behavior may influence your decisions: if the guy sitting across from you is betting aggressively, is it because he has a great hand and knows something you don’t know? Or is he just bad at math? Or is he good at math, and betting high with a hand that can’t really win, but he’s trying to trick you into thinking his hand is better than it really is? This human factor is *not* solvable, but the solvable aspects of the game are used to inform players, which is why at the highest levels *Poker* is a game of psychology, not math. It is these psychological elements that prevent *Poker* from turning into a game of pure luck when played by skilled individuals.
 
-### Solving intransitive games
+#### Solving intransitive games
 
 *Intransitive* games are a fancy way of saying “games like *Rock-Paper-Scissors*.” Since the outcome depends on a simultaneous choice between you and your opponent, there does not appear to be an optimal move, and therefore there is no way to solve it. But in fact, the game *is* solvable… it’s just that the solution looks a bit different from other kinds of games.
 
@@ -104,7 +104,7 @@ The solution to *Rock-Paper-Scissors* is a ratio of 1:1:1, meaning that you shou
 
 Suppose we made a rules change: every win with *Rock* counts as two wins instead of one. Then we would have a different solution where the ratios would be uneven. There are mathematical ways to figure out exactly what this new ratio would be, and we will talk about how to do that later in this course. You might find this useful, for example, if you’re making a real-time strategy game with some units that are strong against other unit types (in an intransitive way), but you want certain units to be more rare and special in gameplay than others. So, you might change the relative capabilities to make certain units more cost-efficient or more powerful overall, which in turn would change the relative frequencies of each unit type appearing (given optimal play).**
 
-### Perfect information
+#### Perfect information
 
 A related concept to solvability is that of information availability. In a game with *perfect* or *complete* information, all players know all elements of the game state at all times. *Chess* and *Go* are obvious examples.
 
@@ -116,7 +116,7 @@ Yet other games have information that is concealed from *all* of the players. An
 
 Trading-card games like *Magic: the Gathering* offer additional layers of privileged information, because players have some privileged information about the possibility space of the game. In particular, each player knows the contents of cards in their own deck, but not their opponent’s, although neither player knows the exact order of cards in their own draw pile. Even more interesting, there are some cards that can give you some limited information on all of these things (such as cards that let you peek at your opponent’s hand or deck), and part of the challenge of deck construction is deciding how important it is to gain information versus how important it is to actually attack or defend.
 
-### Symmetry
+#### Symmetry
 
 Another concept that impacts game balance is whether a game is *symmetric* or *asymmetric*. Symmetric games are those where all players have exactly the same starting position and the same rules. *Chess* is *almost* symmetric, except for that pesky little detail about White going first.
 
@@ -127,6 +127,8 @@ In one respect, you could say that perfectly symmetric games are automatically b
 #### The Metagame
 
 The term *metagame* literally means “the game surrounding the game” and generally refers to the things players do when they’re not actively playing the game, but their actions are still affecting their chances to win their next game. Trading card games like *Magic: the Gathering* are a clear example of this: in between games, players construct a deck, and the contents of that deck affect their ability to win. Another example would be championship-level *Poker* or even world-tournament *Rock-Paper-Scissors*, players analyze the common behaviors and strategies of their opponents. Professional sports have all kinds of things going on in between games: scouting, drafting, trading, training, and so on.
+
+### Metagame Balance
 
 For games that have a strong metagame, balance of the metagame is an important consideration. Even if the game itself is balanced, a metagame imbalance can destroy the balance of the game. Professional sports are a great example. Here is a positive feedback loop that is inherent in any professional sport: teams that win more games, get more money; more money lets them attract better players, which further increases their chance of winning more games. (With apologies to anyone who lives in New York, this is the reason everyone else hates the Yankees.)
 

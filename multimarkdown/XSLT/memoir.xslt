@@ -161,6 +161,7 @@
 
 	<xsl:template name="latex-begin-body">
 		<xsl:text>% Table of Contents
+\setcounter{tocdepth}{3}
 \tableofcontents
 %\listoffigures			% activate to include a List of Figures
 %\listoftables			% activate to include a List of Tables

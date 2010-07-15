@@ -148,7 +148,7 @@ Second, TCGs have a problem that video games don’t have: once a set of cards i
 
 This is admittedly an extreme example, and there are other ways to work around an imbalance like this. The counter-card might have other useful effects. The game overall might be designed such that player choices *during* the game contribute greatly to the outcome, where the deck is more of an influence on your play style than a fixed strategy. Still, some games have gone so far as to print a card that says “When your opponent plays [specific named card], [something really bad happens to them]” with no other effect, so I thought this was worth bringing up.
 
-### Game balance versus metagame balance
+### Game Balance Versus Metagame Balance
 
 In professional sports, metagame fixes make the game more balanced. In TCGs, metagame fixes feel like a hack. Why the difference?
 
